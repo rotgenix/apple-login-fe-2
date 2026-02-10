@@ -5,9 +5,15 @@ import { BE_URL } from "../App";
 export default function AppleLogin() {
     // const BE_URL = import.meta.env.VITE_BE_URL || "http://localhost:4000";
 
-    const startApple = () => {
-        // Redirect to backend directly (no Vite proxy)
-        window.location.href = `${BE_URL}/auth/apple/start`;
+    const startApple = async () => {
+        // Fetch authorizeUrl so we can store state client-side
+        const res = await fetch(`${BE_URL}/auth/apple/start`);
+        const data = await res.json();
+        if (!res.ok || !data?.authorizeUrl || !data?.state) {
+            throw new Error("Failed to start Apple login");
+        }
+        sessionStorage.setItem("apple_oauth_state", data.state);
+        window.location.href = data.authorizeUrl;
     };
 
     return (

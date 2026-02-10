@@ -16,12 +16,17 @@ export default function AppleCallback() {
                 if (!code) throw new Error("No code in callback URL");
                 if (!state) throw new Error("No state in callback URL");
 
+                const expectedState = sessionStorage.getItem("apple_oauth_state");
+                if (expectedState && expectedState !== state) {
+                    throw new Error("Invalid state (CSRF check failed)");
+                }
+
                 setStatus("Completing login on backend...");
 
                 const res = await fetch(`${BE_URL}/auth/apple/complete`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    credentials: "include",
+                    // credentials: "include",
                     body: JSON.stringify({ code, state }),
                 });
 
