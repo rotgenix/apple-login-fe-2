@@ -7,7 +7,7 @@ export default function AppleLogin() {
 
     const startApple = async () => {
         // Fetch authorizeUrl so we can store state client-side
-        const res = await fetch(`${BE_URL}/auth/apple/start`);
+        const res = await fetch(`${BE_URL}/api/apple/auth/web`);
         const data = await res.json();
         if (!res.ok || !data?.authorizeUrl || !data?.state) {
             throw new Error("Failed to start Apple login");

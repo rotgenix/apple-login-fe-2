@@ -5,6 +5,7 @@ import AppleCallback from "./pages/AppleCallback.jsx";
 import axios from "axios";
 
 export const BE_URL = "https://apple-login-be-2.onrender.com";
+// export const BE_URL = "https://api-staging.rydeu.com";
 // export const BE_URL = "http://localhost:4000";
 
 export default function App() {
