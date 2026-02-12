@@ -9,10 +9,14 @@ export default function AppleLogin() {
         // Fetch authorizeUrl so we can store state client-side
         const res = await fetch(`${BE_URL}/api/apple/auth/web`);
         const data = await res.json();
+
+        console.log("data:", data);
+
         if (!res.ok || !data?.authorizeUrl || !data?.state) {
             throw new Error("Failed to start Apple login");
         }
         sessionStorage.setItem("apple_oauth_state", data.state);
+        console.log("19");
         window.location.href = data.authorizeUrl;
     };
 

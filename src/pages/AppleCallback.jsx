@@ -23,7 +23,7 @@ export default function AppleCallback() {
 
                 setStatus("Completing login on backend...");
 
-                const res = await fetch(`${BE_URL}/auth/apple/complete`, {
+                const res = await fetch(`${BE_URL}/api/apple/auth/web/complete`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     // credentials: "include",
